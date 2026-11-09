@@ -8,8 +8,7 @@ Docente: Prof. Silvana Burgos.
 | Apellido | Usuario de GitHub |
 |---|---|
 | Roman | @LahuelRS |
-| Romani | @usuario |
-| Sacco | @usuario |
+| Sacco | @JuanDSacco |
 | Sanchez | @usuario |
 
 **Tablero Kanban:**
