@@ -33,4 +33,23 @@ public class Pelicula {
 		return genero;
 	}
 	
-}
+	public boolean descontarCopia() {
+		
+		if(copiasDisponibles > 0) {
+			copiasDisponibles--;
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public boolean devolverCopia() {
+		
+		if(copiasDisponibles < copiasTotales) {
+			copiasDisponibles++;
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
