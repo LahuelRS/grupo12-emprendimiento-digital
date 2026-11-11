@@ -5,11 +5,11 @@ Docente: Prof. Silvana Burgos.
 
 **Integrantes**
 
-| Apellido | Usuario de GitHub |
-|---|---|
-| Roman | [@LahuelRS](https://github.com/LahuelRS) |
-| Sacco | [@JuanDSacco](https://github.com/JuanDSacco) |
-| Sanchez | [@santiisanchez6-png](https://github.com/santiisanchez6-png) |
+| Apellido | Usuario de GitHub | Módulo |
+|---|---|---|
+| Sacco | [@JuanDSacco](https://github.com/JuanDSacco) | Catálogo de películas |
+| Roman | [@LahuelRS](https://github.com/LahuelRS) | Socios y alquileres |
+| Sanchez | [@santiisanchez6-png](https://github.com/santiisanchez6-png) | Menú, reportes e integración |
 
 **Tablero Kanban:** https://trello.com/b/RaQfvhnN/grupo12-emprendimiento-digital
 
