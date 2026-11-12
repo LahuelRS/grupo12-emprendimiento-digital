@@ -1,6 +1,6 @@
 # Requerimientos: socios y alquileres
 
-Responsable: Roman (@LahuelRS)
+Responsable: Lahuel Roman (@LahuelRS)
 
 ## Historias de usuario
 1. Como empleado del mostrador, quiero registrar un socio nuevo con su DNI y nombre, para poder alquilarle películas.
@@ -13,7 +13,7 @@ Responsable: Roman (@LahuelRS)
 - **Socio:** DNI (identificador único), nombre, deuda acumulada.
 - **Alquiler:** DNI del socio, código de la película, día de retiro.
 
-## Reglas del negocio (a confirmar con el grupo)
+## Reglas del negocio
 - Plazo de alquiler: 3 días.
 - Recargo: $1500 por cada día de atraso.
 - Máximo de películas por socio al mismo tiempo: 3.
