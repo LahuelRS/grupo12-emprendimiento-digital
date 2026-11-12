@@ -8,7 +8,7 @@ Ambas clases se encuentran en `/src`, dentro del paquete por defecto.
 
 ## Estructuras de datos
 - `Map<String, Socio>`: DNI → socio.
-- `Map<String, List<Integer>>`: DNI → códigos de las películas que tiene alquiladas.
+- `Map<String, Map<Integer, Integer>>`: DNI → (código de película → día de retiro). El día de retiro se guarda para calcular el recargo en la devolución. Como la llave interna es el código, un socio no puede tener dos copias de la misma película al mismo tiempo.
 - `Map<Integer, Integer>`: código de película → cantidad de veces alquilada.
 
 ## Métodos de Socio
@@ -19,6 +19,8 @@ Ambas clases se encuentran en `/src`, dentro del paquete por defecto.
 | `getDni()` | `String` | Devuelve el DNI. |
 | `getNombre()` | `String` | Devuelve el nombre. |
 | `getDeuda()` | `int` | Devuelve la deuda acumulada en pesos. |
+| `sumarDeuda(int monto)` | `void` | Suma un recargo a la deuda. Ignora los montos menores o iguales a cero. |
+| `pagarDeuda()` | `void` | Deja la deuda en cero. |
 
 ## Métodos de Alquileres
 
@@ -26,7 +28,7 @@ Se crea con `new Alquileres(catalogo)`.
 
 | Método | Retorno | Descripción |
 |---|---|---|
-| `agregarSocio(Socio socio)` | `boolean` | Registra un socio. Devuelve `false` si el DNI ya existe. |
+| `agregarSocio(Socio socio)` | `boolean` | Registra un socio y crea su mapa de alquileres. Devuelve `false` si el DNI ya existe. |
 | `buscarSocio(String dni)` | `Socio` | Devuelve el socio encontrado o `null` si no existe. |
 | `alquilar(String dni, int codigo, int dia)` | `String` | Registra el alquiler. Devuelve `"OK"` o el motivo del rechazo. |
 | `devolver(String dni, int codigo, int dia)` | `int` | Registra la devolución. Devuelve el recargo en pesos (0 si no hubo atraso) o `-1` si ese socio no tenía esa película. |
@@ -40,18 +42,25 @@ Se crea con `new Alquileres(catalogo)`.
 - Máximo de películas por socio al mismo tiempo: 3.
 - Un socio con deuda no puede alquilar hasta pagarla.
 
+Las tres reglas están definidas como constantes `static final` al principio de `Alquileres`.
+
 ## Motivos de rechazo de un alquiler
-- El socio no existe.
-- La película no existe.
-- No hay copias disponibles.
-- El socio tiene deuda.
-- El socio ya tiene el máximo de películas.
+Se controlan en este orden y el método devuelve el primero que corresponda:
+
+1. El socio no existe.
+2. El socio tiene deuda.
+3. El socio ya tiene el máximo de películas.
+4. El socio ya tiene alquilada esa película.
+5. La película no existe en el catálogo.
+6. No hay copias disponibles.
+
+La copia se retira del catálogo en último lugar, para no descontarla si alguna validación falla.
 
 ## Integración
 - Con `Catalogo`: usa `buscarPorCodigo`, `retirarCopia` y `devolverCopia`. No accede al mapa privado del catálogo.
 - Con `MenuPrincipal`: recibe el DNI, el código y el número de día por parámetro; no lee del teclado ni imprime.
 - Con `Reportes`: entrega `getVecesAlquilada()` para el ranking y los alquileres por género.
 
-## Pendiente de implementación
-- Clases `Socio` y `Alquileres`.
-- Pruebas de cada regla y de los casos de error.
+## Estado de implementación
+- Listo: `Socio`, `agregarSocio`, `buscarSocio`, `alquilar`.
+- Pendiente (día 5): `devolver`, `pagarDeuda`, `alquileresDe` y las pruebas del módulo.
