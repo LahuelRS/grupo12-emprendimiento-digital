@@ -38,9 +38,42 @@ public class Alquileres {
         return socios.get(dni);
     }
 
-    // Pendiente: a implementar en el día 5
     public String alquilar(String dni, int codigo, int dia) {
-        return "Pendiente de implementacion";
+
+        Socio socio = buscarSocio(dni);
+
+        if (socio == null) {
+            return "El socio no esta registrado";
+        }
+
+        if (socio.getDeuda() > 0) {
+            return "El socio tiene una deuda de " + socio.getDeuda() + " pesos";
+        }
+
+        Map<Integer, Integer> susPeliculas = alquilados.get(dni);
+
+        if (susPeliculas.size() >= MAXIMO_POR_SOCIO) {
+            return "El socio ya tiene " + MAXIMO_POR_SOCIO + " peliculas alquiladas";
+        }
+
+        if (susPeliculas.containsKey(codigo)) {
+            return "El socio ya tiene alquilada esa pelicula";
+        }
+
+        Pelicula pelicula = catalogo.buscarPorCodigo(codigo);
+
+        if (pelicula == null) {
+            return "La pelicula no existe en el catalogo";
+        }
+
+        if (catalogo.retirarCopia(codigo) == false) {
+            return "No hay copias disponibles de " + pelicula.getTitulo();
+        }
+
+        susPeliculas.put(codigo, dia);
+        vecesAlquilada.put(codigo, vecesAlquilada.getOrDefault(codigo, 0) + 1);
+
+        return "OK";
     }
 
     // Pendiente: a implementar en el día 5
