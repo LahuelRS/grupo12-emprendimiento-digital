@@ -117,9 +117,13 @@ public class Alquileres {
         return true;
     }
 
-    // Pendiente: a implementar en el día 5
     public List<Integer> alquileresDe(String dni) {
-        return new ArrayList<Integer>();
+
+        if (socios.containsKey(dni) == false) {
+            return new ArrayList<Integer>();
+        }
+
+        return new ArrayList<Integer>(alquilados.get(dni).keySet());
     }
 
     public Map<Integer, Integer> getVecesAlquilada() {
