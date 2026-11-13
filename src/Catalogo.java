@@ -1,5 +1,8 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
 
 public class Catalogo {
 
@@ -64,6 +67,27 @@ public class Catalogo {
 		return true;
 		
 		
+	}
+	
+	public List<Pelicula> buscarPorTitulo(String titulo){
+		List<Pelicula> resultados = new ArrayList<>();
+		
+		for (Pelicula pelicula : peliculas.values()) {
+
+			if (pelicula.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
+
+				resultados.add(pelicula);
+
+			}
+
+		}
+		
+		return resultados;
+	}
+	
+	
+	public Map<Integer, Pelicula> getPeliculas() {
+	    return Collections.unmodifiableMap(peliculas);
 	}
 	
 }
