@@ -42,7 +42,7 @@ Se crea con `new Alquileres(catalogo)`.
 - Máximo de películas por socio al mismo tiempo: 3.
 - Un socio con deuda no puede alquilar hasta pagarla.
 
-Las tres reglas están definidas como constantes `static final` al principio de `Alquileres`.
+El plazo, el recargo y el máximo de películas están definidos como constantes `static final` al principio de `Alquileres`, porque son iguales para toda la videoteca y no cambian de un socio a otro.
 
 ## Motivos de rechazo de un alquiler
 Se controlan en este orden y el método devuelve el primero que corresponda:
@@ -56,11 +56,20 @@ Se controlan en este orden y el método devuelve el primero que corresponda:
 
 La copia se retira del catálogo en último lugar, para no descontarla si alguna validación falla.
 
+## Cálculo del recargo
+`diasDeAtraso = dia de devolución − día de retiro − plazo`
+
+Si el resultado es mayor que cero, el recargo es `diasDeAtraso × 1500` y se suma a la deuda del socio. Si es cero o negativo, la devolución fue a tiempo y el recargo es 0.
+
+Ejemplo: una película retirada el día 10 vence el día 13. Devuelta el día 16, el atraso es de 3 días y el recargo de 4500 pesos.
+
+El método distingue dos resultados que no hay que confundir: `0` significa devolución sin recargo y `-1` significa que ese socio no tenía esa película.
+
 ## Integración
 - Con `Catalogo`: usa `buscarPorCodigo`, `retirarCopia` y `devolverCopia`. No accede al mapa privado del catálogo.
 - Con `MenuPrincipal`: recibe el DNI, el código y el número de día por parámetro; no lee del teclado ni imprime.
 - Con `Reportes`: entrega `getVecesAlquilada()` para el ranking y los alquileres por género.
 
 ## Estado de implementación
-- Listo: `Socio`, `agregarSocio`, `buscarSocio`, `alquilar`.
-- Pendiente (día 5): `devolver`, `pagarDeuda`, `alquileresDe` y las pruebas del módulo.
+- Listo: las clases `Socio` y `Alquileres` completas, con el registro y la búsqueda de socios, el alquiler con sus seis validaciones, la devolución con cálculo de recargo, el pago de deuda y la consulta de películas por socio.
+- Pendiente: las pruebas del módulo, en `/pruebas`.
