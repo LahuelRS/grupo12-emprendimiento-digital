@@ -49,23 +49,21 @@ public class Catalogo {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public boolean eliminarPelicula(int codigo) {
+		Pelicula peliculaEncontrada = buscarPorCodigo(codigo);
+		
+		if(peliculaEncontrada == null) {
+			return false;
+		}
+		
+		if(peliculaEncontrada.getCopiasDisponibles() < peliculaEncontrada.getCopiasTotales()) {
+			return false;
+		}
+			
+		peliculas.remove(codigo);
+		return true;
+		
+		
+	}
 	
 }
