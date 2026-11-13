@@ -54,4 +54,8 @@ public class Pelicula {
 		
 	}
 	
+	public int getCopiasTotales() {
+		return copiasTotales;
+	}
+	
 }
