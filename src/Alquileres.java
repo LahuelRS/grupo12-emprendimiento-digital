@@ -76,9 +76,33 @@ public class Alquileres {
         return "OK";
     }
 
-    // Pendiente: a implementar en el día 5
     public int devolver(String dni, int codigo, int dia) {
-        return -1;
+
+        Socio socio = buscarSocio(dni);
+
+        if (socio == null) {
+            return -1;
+        }
+
+        Map<Integer, Integer> susPeliculas = alquilados.get(dni);
+
+        if (susPeliculas.containsKey(codigo) == false) {
+            return -1;
+        }
+
+        int diaDeRetiro = susPeliculas.get(codigo);
+        int diasDeAtraso = dia - diaDeRetiro - PLAZO_DIAS;
+        int recargo = 0;
+
+        if (diasDeAtraso > 0) {
+            recargo = diasDeAtraso * RECARGO_POR_DIA;
+            socio.sumarDeuda(recargo);
+        }
+
+        susPeliculas.remove(codigo);
+        catalogo.devolverCopia(codigo);
+
+        return recargo;
     }
 
     // Pendiente: a implementar en el día 5
