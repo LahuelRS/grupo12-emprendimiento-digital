@@ -48,15 +48,17 @@ public class Catalogo {
 			return peliculaEncontrada.devolverCopia();
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public Map<Integer, Pelicula> getPeliculas() {
+        return peliculas;
+    }
+
+    public boolean eliminarPelicula(int codigo) {
+        if (peliculas.containsKey(codigo)) {
+            peliculas.remove(codigo);
+            return true;
+        }
+        return false;
+    }
 	
 	
 	

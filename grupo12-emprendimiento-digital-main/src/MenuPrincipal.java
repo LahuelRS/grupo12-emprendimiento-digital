@@ -1,118 +1,12 @@
-import java.util.InputMismatchException;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
-
-public class MenuPrincipal {
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int opcion = 0;
-
-        // Estructuras y datos de ejemplo simulando la integración de los módulos
-        // Catálogo principal (Código -> Película)
-        Map<Integer, String> catalogo = new TreeMap<>();
-        // Estructuras de reportes (Tema: Mapas - TreeMap y entrySet)
-        TreeMap<String, String> catalogoAlfabetico = new TreeMap<>();
-        TreeMap<String, Integer> alquileresPorGenero = new TreeMap<>();
-
-        // Carga de datos de prueba iniciales
-        catalogo.put(1, "Matrix (Ciencia Ficción)");
-        catalogo.put(2, "Toy Story (Infantil)");
-        catalogo.put(3, "El Padrino (Drama)");
-
-        catalogoAlfabetico.put("El Padrino", "El Padrino (Drama)");
-        catalogoAlfabetico.put("Matrix", "Matrix (Ciencia Ficción)");
-        catalogoAlfabetico.put("Toy Story", "Toy Story (Infantil)");
-
-        alquileresPorGenero.put("Ciencia Ficción", 12);
-        alquileresPorGenero.put("Drama", 8);
-        alquileresPorGenero.put("Infantil", 15);
-
-        do {
-            System.out.println("\n=== VIDEOCLUB BLOCKBUSTER - MENÚ PRINCIPAL ===");
-            System.out.println("1. Agregar película");
-            System.out.println("2. Buscar película");
-            System.out.println("3. Eliminar película");
-            System.out.println("4. Listar catálogo");
-            System.out.println("5. Registrar socio");
-            System.out.println("6. Buscar socio");
-            System.out.println("7. Alquilar película");
-            System.out.println("8. Devolver película (Recargo: $1500/día)");
-            System.out.println("9. Reportes (Alfabético y por Género)");
-            System.out.println("10. Salir");
-            System.out.print("Elija una opción: ");
-
-            try {
-                opcion = scanner.nextInt();
-                scanner.nextLine(); // Limpiar el buffer
-
-                switch (opcion) {
-                    case 1:
-                        System.out.println("--> Módulo Catálogo: Agregando película...");
-                        break;
-                    case 2:
-                        System.out.println("--> Módulo Catálogo: Buscando película...");
-                        break;
-                    case 3:
-                        System.out.println("--> Módulo Catálogo: Eliminando película...");
-                        break;
-                    case 4:
-                        System.out.println("--> Listado general del catálogo:");
-                        for (Map.Entry<Integer, String> entry : catalogo.entrySet()) {
-                            System.out.println("Código: " + entry.getKey() + " | Título: " + entry.getValue());
-                        }
-                        break;
-                    case 5:
-                        System.out.println("--> Módulo Socios: Registrando nuevo socio...");
-                        break;
-                    case 6:
-                        System.out.println("--> Módulo Socios: Buscando socio...");
-                        break;
-                    case 7:
-                        System.out.println("--> Módulo Alquileres: Realizando préstamo...");
-                        break;
-                    case 8:
-                        System.out.println("--> Módulo Alquileres: Procesando devolución (Calculando multas de $1500 si hay atraso)...");
-                        break;
-                    case 9:
-                        System.out.println("\n--- REPORTES ORDENADOS (Usando TreeMap y entrySet) ---");
-                        System.out.println("Catalogo ordenado alfabéticamente por título:");
-                        for (Map.Entry<String, String> entry : catalogoAlfabetico.entrySet()) {
-                            System.out.println("- " + entry.getKey() + " -> " + entry.getValue());
-                        }
-                        
-                        System.out.println("\nAlquileres acumulados por género:");
-                        for (Map.Entry<String, Integer> entry : alquileresPorGenero.entrySet()) {
-                            System.out.println("Género: " + entry.getKey() + " | Alquileres: " + entry.getValue());
-                        }
-                        break;
-                    case 10:
-                        System.out.println("Saliendo del sistema... ¡Gracias por usar el programa!");
-                        break;
-                    default:
-                        System.out.println("[Error] Opción inválida. Ingrese un número entre 1 y 10.");
-                }
-
-            } catch (InputMismatchException e) {
-                System.out.println("[Error] Debe ingresar un número entero válido. Intente de nuevo.");
-                scanner.nextLine(); // Limpiar la entrada incorrecta del scanner
-                opcion = 0; // Para evitar que salga del ciclo
-            }
-
-        } while (opcion != 10);
-
-        scanner.close();
-    }
-}
-import java.util.Scanner;
-
 public class MenuPrincipal {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        // 1. Instanciamos el catálogo real de Sacco
-        Catalogo catalogo = new Catalogo(); 
+        // 1. Instanciamos los objetos troncales UNA SOLA VEZ al inicio (como pidió Lahuel)
+        Catalogo catalogo = new Catalogo();
+        Alquileres alquileres = new Alquileres(catalogo);
         
         int opcion = 0;
 
@@ -120,8 +14,13 @@ public class MenuPrincipal {
             System.out.println("\n--- VIDEOCLUB: MENÚ PRINCIPAL ---");
             System.out.println("1. Agregar película");
             System.out.println("2. Buscar película por código");
-            System.out.println("3. Retirar copia de película");
-            System.out.println("4. Devolver copia de película");
+            System.out.println("3. Buscar película por título");
+            System.out.println("4. Eliminar película");
+            System.out.println("5. Registrar socio");
+            System.out.println("6. Buscar socio");
+            System.out.println("7. Alquilar película");
+            System.out.println("8. Devolver película");
+            System.out.println("9. Pagar deuda");
             System.out.println("10. Salir");
             System.out.print("Elija una opción: ");
 
@@ -130,75 +29,150 @@ public class MenuPrincipal {
                 scanner.nextLine(); // Limpiar el buffer
 
                 switch (opcion) {
-                    case 1:
-                        // Ejemplo para agregar (necesitarás crear una Película pasándole datos)
-                        System.out.print("Ingrese el código de la película: ");
-                        int cod = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.print("Ingrese el título: ");
-                        String titulo = scanner.nextLine();
-                        
-                        // Creamos la película y llamamos al método real de Sacco:
-                        Pelicula nuevaPeli = new Pelicula(cod, titulo); // (Asegurate que el constructor coincida)
-                        boolean agregado = catalogo.agregarPelicula(nuevaPeli);
-                        
-                        if (agregado) {
-                            System.out.println("¡Película agregada con éxito al catálogo real!");
-                        } else {
-                            System.out.println("Error: Ya existe una película con ese código.");
-                        }
-                        break;
+                case 1: // Agregar película
+                    System.out.print("Ingrese el código de la película: ");
+                    int codPeli = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar buffer
+                    
+                    System.out.print("Ingrese el título: ");
+                    String tituloPeli = scanner.nextLine();
+                    
+                    System.out.print("Ingrese el género: ");
+                    String generoPeli = scanner.nextLine();
+                    
+                    System.out.print("Ingrese el año: ");
+                    int anioPeli = scanner.nextInt();
+                    
+                    System.out.print("Ingrese las copias totales: ");
+                    int copiasPeli = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar buffer
 
-                    case 2:
-                        // Buscar por código usando el método real
+                    Pelicula nuevaPeli = new Pelicula(codPeli, tituloPeli, generoPeli, anioPeli, copiasPeli);
+                    
+                    boolean agregado = catalogo.agregarPelicula(nuevaPeli);
+                    
+                    if (agregado) {
+                        System.out.println("\n----------------------------------------");
+                        System.out.println("¡ÉXITO: Película agregada correctamente!");
+                        System.out.println("----------------------------------------\n");
+                    } else {
+                        System.out.println("\n[ERROR]: Ya existe una película con ese código en el catálogo.\n");
+                    }
+                    break;
+
+                    case 2: // Buscar por código
                         System.out.print("Ingrese el código a buscar: ");
-                        int codigoBusqueda = scanner.nextInt();
-                        Pelicula encontrada = catalogo.buscarPorCodigo(codigoBusqueda);
-                        
-                        if (encontrada != null) {
-                            System.out.println("Película encontrada: " + encontrada.toString()); // O el método para ver sus datos
+                        int busqCod = scanner.nextInt();
+                        scanner.hasNextLine();
+                        Pelicula peliEncontrada = catalogo.buscarPorCodigo(busqCod);
+                        if (peliEncontrada != null) {
+                            System.out.println("Encontrada: " + peliEncontrada.toString());
                         } else {
                             System.out.println("No se encontró ninguna película con ese código.");
                         }
                         break;
 
-                    case 3:
-                        // Retirar copia
-                        System.out.print("Ingrese el código de la película a retirar: ");
-                        int codRetirar = scanner.nextInt();
-                        boolean retiraOk = catalogo.retirarCopia(codRetirar);
-                        if (retiraOk) {
-                            System.out.println("Copia retirada correctamente.");
-                        } else {
-                            System.out.println("No se pudo retirar (no hay stock o no existe).");
+                    case 3: // Buscar por título (o listar usando TreeMap por el aviso de solo lectura)
+                        System.out.println("--- LISTADO DE PELÍCULAS (Catálogo Alfabético) ---");
+                        // Recordá el aviso de Lahuel: getPeliculas() es de solo lectura, lo copiamos a un TreeMap
+                        TreeMap<Integer, Pelicula> catalogoOrdenado = new TreeMap<Integer, Pelicula>();
+                        for (Pelicula p : catalogoOrdenado.values()) {
+                            System.out.println(p.toString());
                         }
                         break;
 
-                    case 4:
-                        // Devolver copia
-                        System.out.print("Ingrese el código de la película a devolver: ");
-                        int codDevolver = scanner.nextInt();
-                        boolean devueltaOk = catalogo.devolverCopia(codDevolver);
-                        if (devueltaOk) {
-                            System.out.println("Copia devuelta correctamente al inventario.");
+                    case 4: // Eliminar película
+                        System.out.print("Ingrese el código de la película a eliminar: ");
+                        int elimCod = scanner.nextInt();
+                        boolean eliminado = catalogo.eliminarPelicula(elimCod);
+                        if (eliminado) {
+                            System.out.println("Película eliminada correctamente.");
                         } else {
-                            System.out.println("No se pudo procesar la devolución.");
+                            System.out.println("No se pudo eliminar (código inexistente).");
                         }
                         break;
 
-                    case 10:
-                        System.out.println("Saliendo del sistema...");
+                    case 5: // Registrar socio
+                        System.out.print("Ingrese el DNI del socio: ");
+                        String dniReg = scanner.nextLine();
+                        System.out.print("Ingrese el nombre del socio: ");
+                        String nombreReg = scanner.nextLine();
+                        
+                        Socio nuevoSocio = new Socio(dniReg, nombreReg);
+                        boolean socioAgregado = alquileres.agregarSocio(nuevoSocio);
+                        if (socioAgregado) {
+                            System.out.println("\n[ÉXITO]: Socio registrado correctamente.\n");
+                        } else {
+                            System.out.println("\n[ERROR]: Ya existe un socio con ese DNI.\n");
+                        }
                         break;
 
-                    default:
-                        System.out.println("Opción inválida.");
+                    case 6: // Buscar socio
+                        System.out.print("Ingrese el DNI a buscar: ");
+                        String dniBusq = scanner.nextLine();
+                        Socio socioEncontrado = alquileres.buscarSocio(dniBusq);
+                        if (socioEncontrado != null) {
+                            System.out.println("\nEncontrado: " + socioEncontrado.toString() + "\n");
+                        } else {
+                            System.out.println("\n[INFO]: No se encontró ningún socio con ese DNI.\n");
+                        }
+                        break;
+
+                    case 7: // Alquilar película
+                        System.out.print("Ingrese el DNI del socio: ");
+                        String dniAlq = scanner.nextLine();
+                        System.out.print("Ingrese el código de la película: ");
+                        int codAlq = scanner.nextInt();
+                        System.out.print("Ingrese el número de día actual: ");
+                        int diaAlq = scanner.nextInt();
+                        scanner.nextLine(); // Limpiar buffer
+
+                        String resultadoAlquiler = alquileres.alquilar(dniAlq, codAlq, diaAlq);
+                        if (resultadoAlquiler.equals("OK")) {
+                            System.out.println("\n[ÉXITO]: ¡Película alquilada con éxito!\n");
+                        } else {
+                            System.out.println("\n[RECHAZADO]: " + resultadoAlquiler + "\n");
+                        }
+                        break;
+
+                    case 8: // Devolver película
+                        System.out.print("Ingrese el DNI del socio: ");
+                        String dniDev = scanner.nextLine();
+                        System.out.print("Ingrese el código de la película: ");
+                        int codDev = scanner.nextInt();
+                        System.out.print("Ingrese el número de día de devolución: ");
+                        int diaDev = scanner.nextInt();
+                        scanner.nextLine(); // Limpiar buffer
+
+                        int recargo = alquileres.devolver(dniDev, codDev, diaDev);
+                        if (recargo == -1) {
+                            System.out.println("\n[ERROR]: No se pudo procesar la devolución (verifique DNI o que el socio tuviera la película).\n");
+                        } else if (recargo > 0) {
+                            System.out.println("\n[AVISO]: Película devuelta con atraso. Recargo aplicado a la cuenta: $" + recargo + "\n");
+                        } else {
+                            System.out.println("\n[ÉXITO]: Película devuelta a tiempo y sin recargos.\n");
+                        }
+                        break;
+
+                    case 9: // Pagar deuda
+                        System.out.print("Ingrese el DNI del socio para saldar deuda: ");
+                        String dniPago = scanner.nextLine();
+                        boolean pagado = alquileres.pagarDeuda(dniPago);
+                        if (pagado) {
+                            System.out.println("\n[ÉXITO]: Deuda saldada correctamente. El socio ya puede volver a alquilar.\n");
+                        } else {
+                            System.out.println("\n[ERROR]: No se encontró el socio especificado.\n");
+                        }
+                        break;
                 }
             } catch (Exception e) {
-                System.out.println("Error: Ingrese un valor numérico válido.");
+                System.out.println("Error: Ingrese un valor válido. (" + e.getMessage() + ")");
                 scanner.nextLine(); // Limpiar error de lectura
+                opcion = 0;
             }
-        } while (opcion != 10);
 
+        } while (opcion != 10);
+        
         scanner.close();
     }
 }
