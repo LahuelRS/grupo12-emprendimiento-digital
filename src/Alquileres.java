@@ -105,9 +105,16 @@ public class Alquileres {
         return recargo;
     }
 
-    // Pendiente: a implementar en el día 5
     public boolean pagarDeuda(String dni) {
-        return false;
+
+        Socio socio = buscarSocio(dni);
+
+        if (socio == null) {
+            return false;
+        }
+
+        socio.pagarDeuda();
+        return true;
     }
 
     // Pendiente: a implementar en el día 5
