@@ -1,10 +1,10 @@
-Día 1 (Lunes 09/11):
+## Día 1 (Lunes 09/11):
   Se logró contactar a los integrantes (de 4 quedamos tres). Iniciamos con la elección de la idea, abriendo el repositorio en Github y el tablero en Trello.
 
-Dia 2 (Martes 10/11):
+## Dia 2 (Martes 10/11):
   Finalizamos la distribucion de tareas y coordinamos los metodos compartidos entre los integrantes correspondientes. Actualizacion del tablero en Trello.
   
-Día 3 (Miércoles 11/11):
+## Día 3 (Miercoles 11/11)
 
 - **Qué hicimos:** 
   - Se organizó la carpeta `/docs/contratos/` con el acuerdo general de conexión entre clases y el detalle de cada módulo.
@@ -17,7 +17,7 @@ Día 3 (Miércoles 11/11):
 - **Qué nos trabó:** 
   - Ajustes con la ubicación de las carpetas en GitHub (mover archivos a `/src` y `/docs`), permisos en el tablero de Trello y la definición de los nombres exactos de los métodos para que coincidan entre módulos.
 
-Día 4 (Jueves 12/11):
+## Día 4 (Jueves 12/11)
 
 **Sacco:** corrigió la llave de cierre de `Pelicula.java` e incorporó el getter `getCopiasTotales()`. Amplió la clase `Catalogo` implementando el método `eliminarPelicula`, que permite eliminar películas por código, rechazando la operación si la película no existe o tiene copias alquiladas. Desarrolló `buscarPorTitulo`, utilizando `List<Pelicula>` y un recorrido del `HashMap` para encontrar coincidencias parciales sin distinguir mayúsculas y minúsculas. Incorporó `getPeliculas`, que devuelve una vista no modificable del mapa mediante `Collections.unmodifiableMap()`, permitiendo su consulta desde el módulo de reportes. Finalmente, actualizó las clases `Pelicula.java` y `Catalogo.java` en GitHub, junto con el contrato `catalogo.md`, incorporando los nuevos métodos y sus funcionalidades.
 
@@ -26,3 +26,27 @@ Día 4 (Jueves 12/11):
 **Santi:** Conexión del Menú Principal: Se vinculó MenuPrincipal.java con las clases troncales Catalogo y Alquileres, permitiendo que la consola ejecute operaciones reales en lugar de mensajes simulados.
 Módulo de Socios y Alquileres: Implementación completa de Socio.java y Alquileres.java, abarcando ABM de socios, control de deudas, límite de 3 películas simultáneas y validación de copias disponibles.
 Sistema de Mora y Devoluciones: Configuración del plazo de 3 días y cálculo automático de recargos ($1500 por día de atraso) sumados a la cuenta del socio, junto con la opción de saldar deudas.
+
+## Día 5 (Viernes 13/11)
+
+- **Qué hicimos:**
+  - Se completó el módulo de socios y alquileres.
+  - Se implementó el módulo de reportes (`Reportes.java`).
+  - Se agregó la precarga de datos de prueba.
+  - Se realizaron pruebas funcionales del módulo de catálogo, verificando el registro, búsqueda, eliminación y control de disponibilidad de películas.
+  - Se creó la carpeta `/pruebas` en GitHub y se incorporó `PruebaCatalogo.java` para registrar las verificaciones realizadas.
+
+- **Quién hizo qué:**
+  - **Juan Sacco:** Creación de la carpeta `/pruebas` en el repositorio e incorporación de `PruebaCatalogo.java`, una clase independiente para verificar las funcionalidades del catálogo. Se realizaron pruebas de registro de películas, validación de códigos duplicados, búsqueda por código y título, retiro y devolución de copias, eliminación de películas y consulta del mapa. Los resultados obtenidos coincidieron con los esperados. Se organizó el tablero Kanban incorporando tarjetas para las pruebas de cada módulo y se actualizó la captura correspondiente a la jornada.
+  - **Lahuel Román:** Implementación de `devolver`, que calcula los días de atraso a partir del día de retiro y el plazo de 3 días, cobra $1500 por cada día, suma el recargo a la deuda del socio, quita la película de su registro y devuelve la copia al catálogo. También `pagarDeuda`, que salda la deuda del socio, y `alquileresDe`, que informa qué películas tiene en su poder. Actualización del contrato del módulo en `/docs/contratos/alquileres.md` con el cálculo del recargo y el estado final de implementación.
+  - **Santiago Sánchez:** Implementación de `Reportes.java`, con el listado del catálogo ordenado alfabéticamente por título, el agrupamiento de películas por género con `TreeMap` y el ranking de películas más alquiladas, que lee el contador de transacciones. Precarga de 5 películas y 3 socios al iniciar la aplicación, para usar en las pruebas y en la defensa. Commit y push del código integrado a GitHub.
+
+- **Qué nos trabó:**
+  - Hubo que distinguir en `devolver` dos resultados que se podían confundir: devolver `0` significa que la devolución fue a tiempo, mientras que `-1` significa que ese socio no tenía alquilada esa película. El menú tiene que tratarlos distinto.
+  - Fue necesario organizar la carpeta `/pruebas` de GitHub para mantener separados los archivos de pruebas del código principal del sistema.
+
+- **Qué sigue:**
+  - Completar la documentación de los casos de prueba en archivos Markdown dentro de `/pruebas`.
+  - Verificar el funcionamiento integrado de los módulos de Catálogo, Socios, Alquileres y Reportes.
+  - Revisar posibles errores y casos límite.
+  - Continuar con la preparación de la documentación final y la defensa oral.
