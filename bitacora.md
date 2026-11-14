@@ -16,3 +16,13 @@ Día 3 (Miércoles 11/11):
   - **Santiago Sanchez:** Documentación de requerimientos del menú, contrato de diseño de reportes/menú, diagrama de clases y armado base de `MenuPrincipal.java`.
 - **Qué nos trabó:** 
   - Ajustes con la ubicación de las carpetas en GitHub (mover archivos a `/src` y `/docs`), permisos en el tablero de Trello y la definición de los nombres exactos de los métodos para que coincidan entre módulos.
+
+Día 4 (Jueves 12/11):
+
+**Sacco:** corrigió la llave de cierre de `Pelicula.java` e incorporó el getter `getCopiasTotales()`. Amplió la clase `Catalogo` implementando el método `eliminarPelicula`, que permite eliminar películas por código, rechazando la operación si la película no existe o tiene copias alquiladas. Desarrolló `buscarPorTitulo`, utilizando `List<Pelicula>` y un recorrido del `HashMap` para encontrar coincidencias parciales sin distinguir mayúsculas y minúsculas. Incorporó `getPeliculas`, que devuelve una vista no modificable del mapa mediante `Collections.unmodifiableMap()`, permitiendo su consulta desde el módulo de reportes. Finalmente, actualizó las clases `Pelicula.java` y `Catalogo.java` en GitHub, junto con el contrato `catalogo.md`, incorporando los nuevos métodos y sus funcionalidades.
+
+**Roman:** creó la clase Socio (DNI, nombre y deuda, con métodos para sumar un recargo y saldarla) y la clase Alquileres con sus tres mapas: socios por DNI, alquileres de cada socio con el día de retiro y contador de veces alquilada. Implementó el registro y la búsqueda de socios, rechazando DNI repetidos, y el método alquilar con sus seis validaciones (socio inexistente, deuda pendiente, máximo de 3 películas, película ya alquilada por ese socio, película inexistente y falta de copias); si pasa todas, descuenta una copia del catálogo y suma al contador. Actualizó el contrato con la estructura de mapas definitiva.
+
+**Santi:** Conexión del Menú Principal: Se vinculó MenuPrincipal.java con las clases troncales Catalogo y Alquileres, permitiendo que la consola ejecute operaciones reales en lugar de mensajes simulados.
+Módulo de Socios y Alquileres: Implementación completa de Socio.java y Alquileres.java, abarcando ABM de socios, control de deudas, límite de 3 películas simultáneas y validación de copias disponibles.
+Sistema de Mora y Devoluciones: Configuración del plazo de 3 días y cálculo automático de recargos ($1500 por día de atraso) sumados a la cuenta del socio, junto con la opción de saldar deudas.
