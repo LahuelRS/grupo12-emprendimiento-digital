@@ -50,3 +50,24 @@ Sistema de Mora y Devoluciones: Configuración del plazo de 3 días y cálculo a
   - Verificar el funcionamiento integrado de los módulos de Catálogo, Socios, Alquileres y Reportes.
   - Revisar posibles errores y casos límite.
   - Continuar con la preparación de la documentación final y la defensa oral.
+
+## Día 6 (Sábado 14/11)
+
+- **Qué hicimos:**
+  - Se escribieron y ejecutaron las pruebas funcionales de los módulos y se verificó el funcionamiento integrado del sistema.
+  - Quedó completa la integración: el menú pasó a operar sobre las clases reales y se incorporó la clase `Reportes`, con lo que el proyecto quedó funcionando de punta a punta.
+  - Se puso al día la documentación de avance de los días anteriores.
+- **Quién hizo qué:**
+  - **Juan Sacco:** Subió la captura del tablero y las entradas de bitácora de los días 4 y 5, y normalizó el nombre del archivo de requerimientos del catálogo según la consigna. Comenzó con la documentación de los casos de prueba del catálogo.
+  - **Lahuel Román:** Desarrolló `PruebaAlquileres.java`, un programa con datos fijos que verifica el alta de socios, las seis validaciones del alquiler, la devolución dentro del plazo y con atraso, el cálculo del recargo, el bloqueo por deuda, el pago y las consultas por socio. Documentó los 24 casos en `pruebas-alquileres.md` con sus resultados esperados y obtenidos, y ejecutó la prueba integral del sistema recorriendo las opciones del menú.
+  - **Santiago Sánchez:** Subió `MenuPrincipal.java` conectado a `Catalogo`, `Alquileres` y `Reportes`, con datos de prueba iniciales, la opción de pago de deuda y el manejo de entradas inválidas. También `Reportes.java`, con el catálogo alfabético, el ranking de más alquiladas y los alquileres por género, y `PruebaReportes.java` con sus pruebas.
+- **Qué nos trabó:**
+  - Hubo que coordinar el cierre de la integración con la disponibilidad de los integrantes durante el fin de semana, para que el sistema quedara completo antes del día de cierre.
+  - El menú no se puede probar de forma automatizada como el resto, porque lee del teclado, así que se resolvió documentar sus casos como pruebas manuales y automatizar solamente la clase `Reportes`.
+  - Al ejecutar la prueba integral se detectó que la opción de listar el catálogo muestra el código de la película dos veces, un detalle de formato que quedó para corregir.
+- **Qué sigue:**
+  - Subir la documentación de pruebas que falta: catálogo, menú y reportes, e integración.
+  - Definir el nombre del emprendimiento y completar el README final con tecnologías, instrucciones de ejecución, capturas, pruebas y conclusiones.
+  - Corregir el contrato del módulo de menú, que todavía indica que los reportes se arman dentro de `MenuPrincipal`.
+  - Revisión final del repositorio y preparación de la defensa oral.
+- **Captura del tablero:** kanban/dia-6.png
