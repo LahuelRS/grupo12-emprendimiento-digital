@@ -70,3 +70,23 @@ Los 27 casos pasaron. No se detectaron errores en el módulo.
 `PruebaReportes.java` necesita las clases de `/src` para compilar. En Eclipse, la forma más
 simple es marcar la carpeta `pruebas` como carpeta de fuentes (clic derecho sobre la carpeta ›
 Build Path › Use as Source Folder) y después ejecutar `PruebaReportes` con Run.
+## Parte 2: Pruebas manuales de Menú Principal (`MenuPrincipal.java`)
+
+| N° | Qué pruebo | Situación | Resultado esperado | Resultado obtenido | ¿Pasó? |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | Inicio del sistema | Carga de datos de prueba iniciales | Menú principal operativo | Muestra opciones correctamente | Sí |
+| 2 | Encabezado | Ver nombre del emprendimiento | Muestra "Rebobinar" | Aparece "Rebobinar" en pantalla | Sí |
+| 3 | Opción Catálogo | Ingresar al submódulo | Despliega opciones de catálogo | Muestra menú de catálogo | Sí |
+| 4 | Opción Alquileres | Ingresar al submódulo | Despliega opciones de alquiler | Muestra menú de alquileres | Sí |
+| 5 | Opción Reportes | Ingresar al submódulo | Despliega opciones de reportes | Muestra menú de reportes | Sí |
+| 6 | Error de ingreso (letra) | Ingresar letras en vez de números | Captura excepción sin caerse | Muestra aviso de opción inválida | Sí |
+| 7 | Opción fuera de rango | Ingresar número 99 | Alerta opción inválida y repite bucle | Vuelve a pedir opción válida | Sí |
+| 8 | Retorno de catálogo | Volver al menú principal | Regresa al menú principal | Vuelve al menú con éxito | Sí |
+| 9 | Retorno de alquileres | Volver al menú principal | Regresa al menú principal | Vuelve al menú con éxito | Sí |
+| 10 | Retorno de reportes | Volver al menú principal | Regresa al menú principal | Vuelve al menú con éxito | Sí |
+| 11 | Alquiler de copia | Alquilar copia disponible a socio | Registra préstamo y descuenta stock | Préstamo registrado OK | Sí |
+| 12 | Devolución con recargo | Devolver película fuera de término | Aplica recargo de $1500 por día | Calcula multa correctamente | Sí |
+| 13 | Pago de deuda | Abonar saldo pendiente de socio | Actualiza estado de cuenta del socio | Deuda saldada con éxito | Sí |
+| 14 | Visualizar reportes | Consultar listados desde el menú | Imprime reportes ordenados | Muestra datos por consola | Sí |
+| 15 | Salida del sistema | Seleccionar opción de salida | Cierra la ejecución limpiamente | Finaliza programa sin errores | Sí |
+| 16 | Persistencia de sesión | Mantener flujo interactivo activo | No pierde estado durante la ejecución | Sesión estable | Sí |
