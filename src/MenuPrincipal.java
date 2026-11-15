@@ -62,7 +62,7 @@ public class MenuPrincipal {
     }
 
     private static void mostrarMenu() {
-        System.out.println("\n=== VIDEOTECA - MENU PRINCIPAL ===");
+        System.out.println("\n=== REBOBINAR - MENU PRINCIPAL ===");
         System.out.println("1. Agregar pelicula");
         System.out.println("2. Buscar pelicula");
         System.out.println("3. Eliminar pelicula");
