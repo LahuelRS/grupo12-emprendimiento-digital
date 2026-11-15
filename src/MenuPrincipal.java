@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class MenuPrincipal {
@@ -143,9 +142,8 @@ public class MenuPrincipal {
             return;
         }
 
-        for (Map.Entry<Integer, Pelicula> entrada : catalogo.getPeliculas().entrySet()) {
-            System.out.print("Codigo: " + entrada.getKey() + " | ");
-            mostrarPelicula(entrada.getValue());
+        for (Pelicula pelicula : catalogo.getPeliculas().values()) {
+            mostrarPelicula(pelicula);
         }
     }
 
