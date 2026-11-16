@@ -71,3 +71,23 @@ Sistema de Mora y Devoluciones: Configuración del plazo de 3 días y cálculo a
   - Corregir el contrato del módulo de menú, que todavía indica que los reportes se arman dentro de `MenuPrincipal`.
   - Revisión final del repositorio y preparación de la defensa oral.
 - **Captura del tablero:** kanban/dia-6.png
+
+## Día 7 (Domingo 15/11)
+
+- **Qué hicimos:**
+  - Cierre del proyecto: se definió el nombre del emprendimiento, **Rebobinar**, se completó la documentación de pruebas de todos los módulos y se dejó el README en su versión final.
+  - Revisión final del repositorio: el sistema compila desde cero, los contratos coinciden con el código y no queda ningún apartado pendiente.
+- **Quién hizo qué:**
+  - **Juan Sacco:** Documentó los 11 casos de prueba del catálogo en `pruebas/pruebas-catalogo.md`. Tomó y subió las capturas del sistema funcionando (menú, alquiler y devolución con recargo, y reportes) en `docs/capturas`, que se muestran en el README.
+  - **Lahuel Román:** Subió la bitácora y la captura del día 6. Corrigió el listado del catálogo en `MenuPrincipal`, que mostraba el código de cada película dos veces, y repitió la prueba integral completa con el mismo resultado; la documentó en `pruebas/pruebas-integracion.md` (21 casos). Reescribió el README final: nombre del emprendimiento, funcionalidades marcadas según lo implementado, facturación movida a fuera de alcance, instrucciones de ejecución desde Eclipse y desde la línea de comandos, resumen de pruebas y conclusiones. Agregó el nombre Rebobinar al encabezado del menú.
+  - **Santiago Sánchez:** Documentó las pruebas de su módulo en `pruebas/pruebas-menu-reportes.md`: 11 casos automatizados de `Reportes` (orden alfabético sin distinguir mayúsculas, títulos repetidos, empates en el ranking, reportes con el sistema vacío y película dada de baja) y 16 casos manuales del menú. Actualizó `docs/contratos/menu.md` para reflejar que los reportes viven en la clase `Reportes` y las opciones finales del menú.
+- **Qué nos trabó:**
+  - La conectividad de un integrante durante el fin de semana obligó a reordenar las tareas de cierre, pero el resto del equipo tomó la revisión final mientras tanto, y lo pendiente de su módulo se cerró en el día.
+  - Al revisar los documentos contra el código apareció una diferencia: el contrato del menú describía los reportes dentro de `MenuPrincipal`, cuando en la implementación quedaron en una clase aparte, tal como se había acordado en el contrato general. Se corrigió el documento.
+- **Qué sigue:**
+  - Preparación de la defensa oral del jueves 19/11: cada integrante repasa su módulo y la justificación del uso de mapas, y practica modificar su código en vivo.
+- **Captura del tablero:** kanban/dia-7.png
+
+## Resumen final
+
+El sistema Rebobinar quedó completo y funcionando por consola: catálogo de películas, socios y alquileres con recargo por atraso, pago de deuda y tres reportes ordenados con `TreeMap`. El repositorio contiene el código en `/src`, los requerimientos, contratos y diagrama de clases en `/docs`, cuatro documentos de pruebas con sus programas en `/pruebas`, y las capturas diarias del tablero en `/kanban`. Las funcionalidades planificadas se cumplieron, salvo la facturación de mostrador, que se dejó documentada como fuera de alcance.
